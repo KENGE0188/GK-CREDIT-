@@ -3,7 +3,8 @@ name: Build GK Credit APK
 on:
   workflow_dispatch:
   push:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
   build:
@@ -22,10 +23,13 @@ jobs:
       - name: Vérifier Flutter
         run: flutter --version
 
+      - name: Nettoyer le projet
+        run: flutter clean
+
       - name: Installer les dépendances
         run: flutter pub get
 
-      - name: Analyser le projet
+      - name: Vérifier le code
         run: flutter analyze
 
       - name: Construire APK
@@ -36,3 +40,4 @@ jobs:
         with:
           name: GK-Credit-APK
           path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
