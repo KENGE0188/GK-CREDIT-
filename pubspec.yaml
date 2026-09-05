@@ -1,22 +1,38 @@
-name: gk_credit
-description: Application professionnelle de gestion des ventes a credit.
-publish_to: "none"
-version: 1.0.0+1
+name: Build GK Credit APK
 
-environment:
-  sdk: ">=3.2.0 <4.0.0"
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
 
-dependencies:
-  flutter:
-    sdk: flutter
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-  sqflite: ^2.3.3+1
-  path: ^1.9.0
-  shared_preferences: ^2.3.2
-  intl: ^0.19.0
-  pdf: ^3.11.1
-  printing: ^5.13.2
-  share_plus: ^10.0.2
+    steps:
+      - name: Télécharger le projet
+        uses: actions/checkout@v4
 
-flutter:
-  uses-material-design: true
+      - name: Installer Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Vérifier Flutter
+        run: flutter --version
+
+      - name: Installer les dépendances
+        run: flutter pub get
+
+      - name: Analyser le projet
+        run: flutter analyze
+
+      - name: Construire APK
+        run: flutter build apk --release
+
+      - name: Publier APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: GK-Credit-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
