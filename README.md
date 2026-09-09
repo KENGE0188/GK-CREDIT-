@@ -1,36 +1,29 @@
-# GK Crédit Android — Version Flutter
+# GK Crédit — Projet Android Flutter prêt pour GitHub Actions
 
-## Identifiants initiaux
+Application de gestion de ventes à crédit.
+
+## Connexion initiale
 - Utilisateur : `admin`
 - Mot de passe : `1234`
 
 ## Fonctionnalités
 - Authentification locale
-- SQLite avec création automatique des tables
+- SQLite
 - Clients
 - Articles et stock
-- Vente à crédit
-- Avance et paiements partiels
-- Calcul automatique de la dette
-- Échéances et retards
-- Reçus PDF / impression / partage
-- Rapports
-- Export de sauvegarde
-- Déconnexion et persistance de session
+- Ventes à crédit
+- Avances et paiements
+- Calcul de dette
+- Échéances
+- Reçus PDF, impression et partage
+- Rapports et sauvegarde
 
-## Générer l'APK
+## Génération de l'APK avec GitHub
+1. Importer tout le contenu de ce dossier dans un dépôt GitHub.
+2. Ouvrir **Actions**.
+3. Choisir **Build GK Credit APK**.
+4. Cliquer **Run workflow**.
+5. Attendre la fin du build.
+6. Ouvrir l'exécution terminée et télécharger l'artifact **GK-Credit-APK**.
 
-1. Installer Flutter SDK et Android Studio.
-2. Ouvrir le dossier du projet.
-3. Dans le terminal :
-```bash
-flutter create .
-flutter pub get
-flutter build apk --release
-```
-
-L'APK sera normalement généré dans :
-`build/app/outputs/flutter-apk/app-release.apk`
-
-## Important
-Le projet est livré avec le code Flutter. La compilation de l'APK nécessite Flutter + Android SDK, qui ne sont pas installés dans l'environnement de génération de ce fichier.
+Le fichier produit est `app-release.apk`.

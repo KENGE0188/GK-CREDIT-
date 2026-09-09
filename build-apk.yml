@@ -1,0 +1,35 @@
+name: Build GK Credit APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Télécharger le projet
+        uses: actions/checkout@v4
+
+      - name: Installer Flutter stable
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Vérifier Flutter
+        run: flutter --version
+
+      - name: Installer les dépendances
+        run: flutter pub get
+
+      - name: Vérifier le code
+        run: flutter analyze
+
+      - name: Construire APK Release
+        run: flutter build apk --release
+
+      - name: Publier APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: GK-Credit-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
